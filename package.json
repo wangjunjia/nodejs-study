@@ -1,0 +1,17 @@
+{
+    "name": "outside-cli",
+    "version": "1.0.0",
+    "private": true,
+    "bin": {
+        "outside": "bin/outside"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "minimist": "^1.2.0",
+        "ora": "^3.1.0"
+    }
+}
