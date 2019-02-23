@@ -1,0 +1,28 @@
+{
+  "name": "ginit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ginit": "bin/ginit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "14.0.5",
+    "chalk": "2.3.0",
+    "clear": "0.0.1",
+    "clui": "0.3.6",
+    "configstore": "3.1.1",
+    "figlet": "1.2.0",
+    "inquirer": "5.0.1",
+    "lodash": "^4.17.11",
+    "minimist": "1.2.0",
+    "simple-git": "1.89.0",
+    "touch": "3.1.0"
+  }
+}
