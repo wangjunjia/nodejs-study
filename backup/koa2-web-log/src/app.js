@@ -1,9 +1,9 @@
 const Koa = require('koa')
+const KoaRouter = require('koa-router')
 const nunjucksViews = require('koa-nunjucks-promise')
 const mount = require('koa-mount')
 const static = require('koa-static')
 const session = require('koa-session2')
-const bodyParser = require('koa-bodyparser')
 const log4js = require('koa-log4')
 const Store = require('./store')
 
@@ -14,7 +14,7 @@ logger.info(`-------- step into koa -------------`)
 
 const PORT = 3000
 const app = new Koa()
-const route = require('./router')
+const route = new KoaRouter()
 
 app.use(nunjucksViews(`${__dirname}/../views`, {
   ext: 'html',
@@ -32,14 +32,41 @@ app.use(nunjucksViews(`${__dirname}/../views`, {
 
 // 静态文件路径，必须在 模版 之后
 app.use(mount('/static', static(`${__dirname}/../public`)))
-app.use(log4js.koaLogger(log4js.getLogger('http'), {level: 'auto'}))
 
-app.use(bodyParser())
 app.use(session({
   key: 'SESSIONID', // default: 'koa:sess'
   store: new Store(),
   maxAge: 5000, // 超时时间 单位秒（s）
 }))
+
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (err) {
+    ctx.body = { message: err.message }
+    ctx.stats = err.status || 500
+  }
+})
+
+route.get('/', async ctx => {
+  logger.debug(`this is session view ${ctx.session.view}`)
+  if (ctx.session.view === undefined) {
+    ctx.session.view = 0
+  } else {
+    ctx.session.view += 1
+  }
+  logger.debug(`this is test session view after ${ctx.session.view}`)
+  
+  ctx.render('index', {
+    title: 'Koa2Web',
+    content: 'hello koa2 web'
+  })
+})
+
+route.get('/route/test', async ctx => {
+  logger.debug(`this is test log `)
+  ctx.body ='hello world'
+})
 
 app.use(route.routes())
   .use(route.allowedMethods())
