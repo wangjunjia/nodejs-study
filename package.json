@@ -1,0 +1,25 @@
+{
+  "name": "koa2-ts",
+  "version": "1.0.0",
+  "description": "koa2 ts",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "node dist/server.js",
+    "build": "npm run tslint && npm run build-ts",
+    "build-ts": "tsc",
+    "watch": "npm run tslint && npm run watch-ts",
+    "watch-ts": "tsc -w",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.48",
+    "tslint": "^5.13.1",
+    "typescript": "^3.3.3333"
+  }
+}
