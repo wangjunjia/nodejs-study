@@ -1,0 +1,13 @@
+{
+  "name": "promise-callback-style-api",
+  "version": "1.0.0",
+  "description": "promise 和 callback 风格共存的 api 练习",
+  "private": true,
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "request": "2.88.0"
+  }
+}
